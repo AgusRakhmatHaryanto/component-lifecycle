@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import React from "react";
 
 export default function Counter({ finishGame }) {
   const [count, setCount] = useState(0);
 
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    // return () => {
+    //   window.removeEventListener("keydown", handleKeyPress);
+    // };
+  }, [count]);
+
+  const handleKeyPress = (event) => {
+    console.log('key pressed');
+    const { key } = event;
+    if (key === "Enter") {
+      setCount(count + 1);
+    }
+  };
   const handleClick = () => {
     setCount(count + 1);
   };
